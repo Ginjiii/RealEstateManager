@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Real Estate Manager</string>
+    <string name="list">List</string>
+    <string name="map">Map</string>
+    <string name="search">Search</string>
+    <string name="loan">Loan</string>
+</resources>
