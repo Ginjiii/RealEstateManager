@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../AS/icons/material/materialicons/bar_chart/baseline_bar_chart_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../AS/icons/material/materialicons/access_time/baseline_access_time_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="loan" />
+                            <entry key="outputName" value="time" />
                             <entry key="sourceFile" value="E:\Openclassrooms\RealEstateManager\RealEstateManager" />
                           </map>
                         </option>

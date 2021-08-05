@@ -1,44 +1,74 @@
 package com.openclassrooms.realestatemanager
 
 import android.content.Context
-import android.net.wifi.WifiManager
-import java.text.DateFormat
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
+
 
 /**
  * Created by Philippe on 21/02/2018.
  */
 object Utils {
     /**
-     * Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @param dollars
-     * @return
+     *  Convert dollars to euros
      */
-    fun convertDollarToEuro(dollars: Int): Int {
-        return Math.round(dollars * 0.812).toInt()
+    fun convertDollarToEuro(dollar: Int): Int {
+        return (dollar * 0.843).roundToInt()
     }
 
     /**
-     * Conversion de la date d'aujourd'hui en un format plus approprié
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @return
+     *  Convert euros to dollars
      */
-    val todayDate: String
-        get() {
-            val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd")
-            return dateFormat.format(Date())
-        }
+    fun convertEuroToDollar(euro: Int): Int {
+        return (euro * 1.186).roundToInt()
+    }
 
     /**
-     * Vérification de la connexion réseau
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @param context
-     * @return
+     *  Convert today's date to a more suitable format
      */
-    fun isInternetAvailable(context: Context): Boolean {
-        val wifi = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        return wifi.isWifiEnabled
+    fun getTodayDate(): String {
+        val currentDate = Calendar.getInstance()
+        return SimpleDateFormat("dd-MM-yyyy").format(currentDate.time)
+    }
+
+    /**
+     *  Check internet connection
+     */
+    fun isInternetConnected(context: Context): Boolean {
+        var result = false
+        val connectivityManager  =  context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val networkCapabilities =
+                    connectivityManager.getNetworkCapabilities(network) ?: return false
+            result = when {
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            connectivityManager.run {
+                connectivityManager.activeNetworkInfo?.run {
+                    result = when (type) {
+                        ConnectivityManager.TYPE_WIFI -> true
+                        ConnectivityManager.TYPE_MOBILE -> true
+                        ConnectivityManager.TYPE_ETHERNET -> true
+                        else -> false
+                    }
+                }
+            }
+        }
+
+        return result
+    }
+
+    fun Context.isConnectedToNetwork(): Boolean {
+        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting ?: false
     }
 }
