@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_small">15dp</dimen>
+    <dimen name="size_pic_slider">300dp</dimen>
+    <dimen name="details_size">15sp</dimen>
+    <dimen name="icon_details_size">20dip</dimen>
+</resources>

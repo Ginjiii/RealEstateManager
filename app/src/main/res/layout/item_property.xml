@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cv_property"
+    android:id="@+id/property"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_image"
+            android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
@@ -25,7 +25,7 @@
             tools:src="@drawable/not_supported" />
 
         <com.haozhang.lib.SlantedTextView
-            android:id="@+id/tv_sold_diagonal"
+            android:id="@+id/sold_diagonal"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:gravity="center"
@@ -40,7 +40,7 @@
             app:slantedTextSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_type"
+            android:id="@+id/type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
@@ -48,24 +48,24 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/tv_city"
-            app:layout_constraintTop_toBottomOf="@id/iv_image"
+            app:layout_constraintRight_toLeftOf="@id/city"
+            app:layout_constraintTop_toBottomOf="@id/image"
             tools:ignore="RtlSymmetry"
             tools:text="type" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_city"
+            android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="@id/tv_type"
+            app:layout_constraintLeft_toRightOf="@id/type"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_image"
+            app:layout_constraintTop_toBottomOf="@id/image"
             tools:ignore="RtlSymmetry"
             tools:text="Manhattan" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_price"
+            android:id="@+id/price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
@@ -74,25 +74,25 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@id/tv_type"
-            app:layout_constraintTop_toBottomOf="@id/tv_type"
+            app:layout_constraintRight_toRightOf="@id/type"
+            app:layout_constraintTop_toBottomOf="@id/type"
             tools:ignore="RtlSymmetry"
             tools:text="12,000,000" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_room"
+            android:id="@+id/room"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/room"
             android:drawablePadding="5dp"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_price"
-            app:layout_constraintTop_toTopOf="@id/tv_price"
+            app:layout_constraintLeft_toRightOf="@id/price"
+            app:layout_constraintTop_toTopOf="@id/price"
             tools:text="6" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_bedroom"
+            android:id="@+id/bedroom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -100,12 +100,12 @@
             android:drawablePadding="5dp"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_room"
-            app:layout_constraintTop_toTopOf="@id/tv_price"
+            app:layout_constraintLeft_toRightOf="@id/room"
+            app:layout_constraintTop_toTopOf="@id/price"
             tools:text="3" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_bathroom"
+            android:id="@+id/bathroom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -113,8 +113,8 @@
             android:drawablePadding="5dp"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_bedroom"
-            app:layout_constraintTop_toTopOf="@id/tv_price"
+            app:layout_constraintLeft_toRightOf="@id/bedroom"
+            app:layout_constraintTop_toTopOf="@id/price"
             tools:text="2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

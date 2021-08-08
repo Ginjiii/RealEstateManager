@@ -36,4 +36,16 @@
             <item name="android:layout_height">0dp</item>
         </style>
 
-    </resources>
+    <style name="TitleREM">
+        <![CDATA[<style name="TitleREM">         <item name="android:textSize">@dimen/text_title</item>         <item name="android:textStyle">bold</item>     </style>]]></style>
+
+    <style name="IconDetailREM">
+        <![CDATA[<style name="IconDetailREM">         <item name="android:layout_weight">@dimen/icon_details_size</item>         <item name="android:layout_height">@dimen/icon_details_size</item>         <item name="android:tint">@color/colorPrimaryDark</item>     </style>]]></style>
+
+    <style name="SmallTitleREM">
+        <![CDATA[<style name="SmallTitleREM" parent="SmallTextREM">         <item name="android:textStyle">bold</item>      </style>]]></style>
+
+    <style name="SmallTextREM">
+        <![CDATA[<style name="SmallTextREM">         <item name="android:textSize">@dimen/small_text</item>     </style>]]></style>
+
+</resources>

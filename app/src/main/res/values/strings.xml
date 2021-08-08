@@ -32,4 +32,16 @@
     <string name="total_interest">Total interest</string>
     <string name="annual_payment">Annual payment</string>
     <string name="monthly_payment">Monthly payment</string>
+    <string name="loan_calculator">Loan Calculator</string>
+    <string name="currency">Currency</string>
+    <string name="description">Description</string>
+    <string name="n_a">N/A</string>
+    <string name="surface">Surface</string>
+    <string name="number_of_rooms">Number of rooms</string>
+    <string name="number_of_bathrooms">Number of bathrooms</string>
+    <string name="number_of_bedrooms">Number of bedrooms</string>
+    <string name="price">Price</string>
+    <string name="type">Type</string>
+    <string name="near_by">Near by</string>
+    <string name="location">Location</string>
 </resources>

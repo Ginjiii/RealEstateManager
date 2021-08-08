@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/tb_menu_currency"
+        android:icon="@drawable/euro"
+        android:title="@string/currency"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/tb_menu_search"
+        android:icon="@drawable/search"
+        android:title="@string/search"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+</menu>
