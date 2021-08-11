@@ -15,11 +15,11 @@ interface PropertyDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateProperty(property: Property)
 
-    @Transaction
+
     @Query("SELECT * FROM properties ORDER BY properties_id DESC")
     fun getAllProperties(): LiveData<List<PropertyWithAllData>>
 
-    @Transaction
+
     @Query("SELECT * FROM properties " +
             "INNER JOIN agents ON agent_id = agents_id WHERE " +
             "lastName LIKE :agent" +

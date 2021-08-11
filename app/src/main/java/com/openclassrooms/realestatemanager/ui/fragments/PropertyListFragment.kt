@@ -4,18 +4,18 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.utils.Utils.showDetailsContainer
+
 import com.openclassrooms.realestatemanager.adapters.PropertyListAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBinding
-import com.openclassrooms.realestatemanager.models.Currency
+
 import com.openclassrooms.realestatemanager.models.PropertyWithAllData
-import kotlinx.android.synthetic.main.fragment_property_list.*
+
 
 class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
 
@@ -28,7 +28,6 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     private var isDoubleScreenMode = false
 
     private lateinit var menu: Menu
-
 
 
     companion object {
@@ -56,10 +55,9 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     // Setup recyclerview
     private fun configureRecyclerView() {
         propertyListAdapter = PropertyListAdapter(listOf<PropertyWithAllData>(), Glide.with(this), isDoubleScreenMode)
-        recyclerView_list.adapter = propertyListAdapter
-        recyclerView_list.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerViewList.adapter = propertyListAdapter
+        binding.recyclerViewList.layoutManager = LinearLayoutManager(activity)
     }
-
 
 
     // Setup toolbar
@@ -68,10 +66,6 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
         inflater.inflate(R.menu.toolbar, menu)
         menu.getItem(0).isVisible = true
         menu.getItem(1).isVisible = false
-        menu.getItem(2).isVisible = false
-        menu.getItem(3).isVisible = false
-        menu.getItem(4).isVisible = false
-        menu.getItem(5).isVisible = true
         this.menu = menu
     }
 

@@ -23,6 +23,13 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         setupBottomNavigation(binding)
+
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.fl_container, PropertyListFragment())
+            }
+        }
     }
 
 

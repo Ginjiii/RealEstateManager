@@ -1,5 +1,16 @@
 package com.openclassrooms.realestatemanager.repositories
 
-class PropertyRepository {
+import androidx.annotation.MainThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
+class PropertyRepository {
+    private val currentPropertyIdMutableLiveData = MutableLiveData<Int>()
+
+    @MainThread
+    fun setCurrentPropertyId(id: Int) {
+        currentPropertyIdMutableLiveData.value = id
+    }
+
+    fun getCurrentPropertyIdLiveData() : LiveData<Int> = currentPropertyIdMutableLiveData
 }
