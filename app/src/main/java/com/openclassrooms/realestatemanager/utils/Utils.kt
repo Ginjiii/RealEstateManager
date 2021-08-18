@@ -3,17 +3,21 @@ package com.openclassrooms.realestatemanager.utils
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.location.Geocoder
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ScrollView
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.Guideline
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
 import pub.devrel.easypermissions.EasyPermissions
@@ -31,7 +35,7 @@ object Utils {
      *  Convert dollars to euros
      */
     fun convertDollarToEuro(dollar: Int): Int {
-        return (dollar * 0.843).roundToInt()
+        return (dollar * 0.85).roundToInt()
     }
 
     /**
@@ -39,31 +43,6 @@ object Utils {
      */
     fun convertEuroToDollar(euro: Int): Int {
         return (euro * 1.186).roundToInt()
-    }
-
-    /**
-     *  Hide Details Container in Tablet Landscape Mode
-     */
-    fun hideDetailsContainer(activity: Activity) {
-        val guideline: Guideline? = activity.findViewById(R.id.guideline)
-        val scrollView: ScrollView? = activity.findViewById(R.id.sv_right)
-        val divider: View? = activity.findViewById(R.id.divider)
-        guideline?.setGuidelinePercent(1F)
-        scrollView?.visibility = View.GONE
-        divider?.visibility = View.GONE
-    }
-
-    /**
-     *  Show Details Container in Tablet Landscape Mode
-     */
-    fun showDetailsContainer(activity: Activity) {
-        TransitionManager.beginDelayedTransition(activity.findViewById(R.id.sv_right))
-        val guideline: Guideline? = activity.findViewById(R.id.guideline)
-        val scrollView: ScrollView? = activity.findViewById(R.id.sv_right)
-        val divider: View? = activity.findViewById(R.id.divider)
-        guideline?.setGuidelinePercent(0.33F)
-        scrollView?.visibility = View.VISIBLE
-        divider?.visibility = View.VISIBLE
     }
 
     /**
@@ -94,6 +73,52 @@ object Utils {
     fun isGPSEnabled(context: Context): Boolean {
         val locationManager = (context.getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    /**
+     *  Setup Alert Dialog to Activate GPS
+     */
+    fun setupAlertDialogToActivateGPS(context: Context, intent: Intent, option: Bundle?) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.dialog_title_gps).setMessage(R.string.dialog_message_gps)
+            .setPositiveButton(R.string.dialog_positive) { _, _ ->
+                ContextCompat.startActivity(
+                    context,
+                    intent,
+                    option
+                )
+            }
+            .setNegativeButton(R.string.dialog_negative) { dialog, _ -> dialog.cancel() }
+        val alert = builder.create()
+        alert.show()
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+    }
+
+    /**
+     *  Setup Alert Dialog to Activate Internet
+     */
+    fun setupAlertDialogToActivateInternet(context: Context, intent1: Intent, intent2: Intent, option: Bundle?) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.dialog_title_internet).setMessage(R.string.dialog_message_internet)
+            .setPositiveButton(R.string.dialog_button_wifi) { _, _ ->
+                ContextCompat.startActivity(
+                    context,
+                    intent1,
+                    option
+                )
+            }
+            .setNegativeButton(R.string.dialog_button_data) { _, _ ->
+                ContextCompat.startActivity(
+                    context,
+                    intent2,
+                    option
+                )
+            }
+        val alert = builder.create()
+        alert.show()
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
     }
 
     /**

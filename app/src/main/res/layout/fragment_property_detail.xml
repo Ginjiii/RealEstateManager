@@ -64,11 +64,12 @@
 
             <ImageView
                 android:id="@+id/details_view_surface_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/area"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/details_view_surface_title"
@@ -91,11 +92,12 @@
 
             <ImageView
                 android:id="@+id/details_view_room_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/room"
-                app:layout_constraintTop_toBottomOf="@id/details_view_surface"
-                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"/>
+                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"
+                app:layout_constraintTop_toBottomOf="@id/details_view_surface" />
 
             <TextView
                 android:id="@+id/details_view_room_title"
@@ -119,11 +121,12 @@
 
             <ImageView
                 android:id="@+id/details_view_bath_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/bathroom"
-                app:layout_constraintTop_toBottomOf="@id/details_view_rooms"
-                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"/>
+                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"
+                app:layout_constraintTop_toBottomOf="@id/details_view_rooms" />
 
             <TextView
                 android:id="@+id/details_view_bath_title"
@@ -147,11 +150,12 @@
 
             <ImageView
                 android:id="@+id/details_view_bed_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/bedroom"
-                app:layout_constraintTop_toBottomOf="@id/details_view_bath"
-                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"/>
+                app:layout_constraintStart_toStartOf="@id/details_view_surface_icon"
+                app:layout_constraintTop_toBottomOf="@id/details_view_bath" />
 
             <TextView
                 android:id="@+id/details_view_bed_title"
@@ -185,11 +189,12 @@
 
             <ImageView
                 android:id="@+id/detail_view_price_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/dollar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/detail_view_price_title"
                 android:layout_width="0dp"
@@ -209,13 +214,15 @@
                 app:layout_constraintStart_toStartOf="@id/detail_view_price_title"
                 app:layout_constraintTop_toBottomOf="@id/detail_view_price_title"
                 app:layout_constraintEnd_toEndOf="@id/detail_view_price_title"/>
+
             <ImageView
                 android:id="@+id/detail_view_type_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/type"
                 app:layout_constraintStart_toStartOf="@id/detail_view_price_icon"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_price"/>
+                app:layout_constraintTop_toBottomOf="@id/detail_view_price" />
             <TextView
                 android:id="@+id/detail_view_type_title"
                 android:layout_width="0dp"
@@ -235,13 +242,15 @@
                 app:layout_constraintStart_toStartOf="@id/detail_view_type_title"
                 app:layout_constraintEnd_toEndOf="@id/detail_view_type_title"
                 app:layout_constraintTop_toBottomOf="@id/detail_view_type_title"/>
+
             <ImageView
                 android:id="@+id/detail_view_near_icon"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/near"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_type"
-                app:layout_constraintStart_toStartOf="@id/detail_view_price_icon"/>
+                app:layout_constraintStart_toStartOf="@id/detail_view_price_icon"
+                app:layout_constraintTop_toBottomOf="@id/detail_view_type" />
             <TextView
                 android:id="@+id/detail_view_near_title"
                 android:layout_width="0dp"
@@ -252,44 +261,56 @@
                 app:layout_constraintBottom_toBottomOf="@id/detail_view_near_icon"
                 app:layout_constraintStart_toEndOf="@id/detail_view_near_icon"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
             <ImageView
                 android:id="@+id/detail_view_amenity_one"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="@id/detail_view_near_title"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_near_title"/>
+                app:layout_constraintTop_toBottomOf="@id/detail_view_near_title" />
+
             <ImageView
                 android:id="@+id/detail_view_amenity_two"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
-                app:layout_constraintTop_toTopOf="@id/detail_view_amenity_one"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/detail_view_amenity_one"
-                app:layout_constraintStart_toEndOf="@id/detail_view_amenity_one"/>
+                app:layout_constraintStart_toEndOf="@id/detail_view_amenity_one"
+                app:layout_constraintTop_toTopOf="@id/detail_view_amenity_one" />
+
             <ImageView
                 android:id="@+id/detail_view_amenity_three"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
-                app:layout_constraintTop_toTopOf="@id/detail_view_amenity_one"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/detail_view_amenity_one"
-                app:layout_constraintStart_toEndOf="@id/detail_view_amenity_two"/>
+                app:layout_constraintStart_toEndOf="@id/detail_view_amenity_two"
+                app:layout_constraintTop_toTopOf="@id/detail_view_amenity_one" />
+
             <ImageView
                 android:id="@+id/detail_view_amenity_four"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_one"
-                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_one"/>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_one"
+                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_one" />
+
             <ImageView
                 android:id="@+id/detail_view_amenity_five"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_two"
-                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_two"/>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_two"
+                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_two" />
+
             <ImageView
                 android:id="@+id/detail_view_amenity_six"
-                android:layout_width="0dp"
                 style="@style/IconDetailREM"
-                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_three"
-                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_three"/>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/detail_view_amenity_three"
+                app:layout_constraintTop_toBottomOf="@id/detail_view_amenity_three" />
 
 
 

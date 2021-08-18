@@ -24,9 +24,9 @@ class ModelRepository @Inject constructor(
 
     // Property
 
-//    fun getPropertyForId(propertyId: Int): LiveData<PropertyWithAllData> {
-//        return propertyDao.getPropertyForId(propertyId)
-//    }
+    fun getPropertyForId(propertyId: Int): LiveData<PropertyWithAllData> {
+        return propertyDao.getPropertyForId(propertyId)
+    }
 
     fun observeAllFilteredProperties(
             agent: String, type: String,

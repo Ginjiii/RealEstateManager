@@ -6,6 +6,7 @@
             <item name="colorPrimary">@color/colorPrimary</item>
             <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
             <item name="colorAccent">@color/colorAccent</item>
+            <item name="colorOnPrimary">@color/colorTextAccent</item>
         </style>
 
         <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -35,6 +36,16 @@
             <item name="android:layout_width">3dp</item>
             <item name="android:layout_height">0dp</item>
         </style>
+
+    <!-- TOOLBAR THEME -->
+    <style name="ToolBarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorTextAccent</item>
+    </style>
+
+    <!-- TOOLBAR TITLE THEME -->
+    <style name="ToolBarTheme.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/toolbar_text_size</item>
+    </style>
 
     <style name="TitleREM">
         <![CDATA[<style name="TitleREM">         <item name="android:textSize">@dimen/text_title</item>         <item name="android:textStyle">bold</item>     </style>]]></style>
