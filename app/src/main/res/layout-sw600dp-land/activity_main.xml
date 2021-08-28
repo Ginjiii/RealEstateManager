@@ -10,45 +10,81 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/listOfProperty"
-                android:name="com.openclassrooms.realestatemanager.ui.fragments.PropertyListFragment"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:layout="@layout/item_property" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/detailOfProperty"
-                android:name="com.openclassrooms.realestatemanager.ui.fragments.PropertyDetailFragment"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                tools:layout="@layout/fragment_property_detail" />
-
-        </LinearLayout>
+        <include
+            android:id="@+id/main_activity_toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemIconTint="@color/custom_bottom_nav_choice"
             app:itemTextColor="@color/custom_bottom_nav_choice"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintLeft_toLeftOf="@id/linearLayout"
-            app:layout_constraintRight_toRightOf="@id/linearLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/bottom_nav_menu" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_activity_container_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_activity_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/right_screen"/>
+
+        <FrameLayout
+            android:id="@+id/right_screen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/main_activity_container_view"
+            app:layout_constraintBottom_toBottomOf="@id/main_activity_container_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/main_activity_container_view"/>
+
+        <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
+            xmlns:rfal="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/activity_main_rfal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            rfal:rfal_frame_color="#ffffff"
+            rfal:rfal_frame_alpha="0.7"
+            rfal:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+            app:layout_constraintEnd_toEndOf="@id/main_activity_container_view"
+            rfal:layout_constraintStart_toStartOf="@id/main_activity_container_view"
+            rfal:layout_constraintTop_toTopOf="@id/main_activity_container_view">
+
+            <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
+                xmlns:rfab="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activity_main_rfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:padding="12dp"
+                rfab:rfab_size="normal"
+                rfab:rfab_drawable="@drawable/ic_baseline_add_24"
+                rfab:rfab_color_normal="@color/colorAccent"
+                rfab:rfab_color_pressed="@color/colorAccentDark"
+                rfab:rfab_shadow_radius="12dp"
+                rfab:rfab_shadow_color="@color/colorPrimary"
+                rfab:rfab_shadow_dx="0dp"
+                rfab:rfab_shadow_dy="5dp"
+                />
+        </com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

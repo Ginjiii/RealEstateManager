@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -11,8 +12,9 @@ import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapters.PropertyListAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBinding
+import com.openclassrooms.realestatemanager.models.Agent
+import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.PropertyWithAllData
-import com.openclassrooms.realestatemanager.ui.viewModels.PropertyListViewModel
 import com.openclassrooms.realestatemanager.utils.Currency
 
 
@@ -21,7 +23,6 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     private var fragmentPropertyListBinding: FragmentPropertyListBinding? = null
     private val binding get() = fragmentPropertyListBinding!!
 
-    private val listViewModel: PropertyListViewModel by viewModels()
     protected var currentCurrency: Currency? = null
 
     private lateinit var propertyListAdapter: PropertyListAdapter
@@ -44,20 +45,37 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     ): View {
         fragmentPropertyListBinding =
             FragmentPropertyListBinding.inflate(inflater, container, false)
-        configureRecyclerView()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        updateDummyList()
+        configureRecyclerView()
+    }
     // Setup recyclerview
     private fun configureRecyclerView() {
         propertyListAdapter = PropertyListAdapter(
-            listOf<PropertyWithAllData>(),
+            propertiesList,
             currentCurrency,
             Glide.with(this),
             isDoubleScreenMode
         )
+
+        binding.recyclerViewList.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewList.adapter = propertyListAdapter
-        binding.recyclerViewList.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun updateDummyList(){
+        val agent = Agent("AAA", "BBB", "CCC" )
+        val property = Property(0,"abc", 0,0,0,0,0,"belle maison",
+            "address", "91919191", "city", "FRANCE", true, "available date", "soldDate", 0, "photo", "photoLabel" )
+        val propertyWithAllData = PropertyWithAllData(property, agent)
+
+        propertiesList = listOf<PropertyWithAllData>(propertyWithAllData)
+        Log.d("TAGii", "size:" + propertiesList.size)
+//        propertyListAdapter.update(propertyWithAllDataList)
     }
 
 
@@ -80,5 +98,10 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TAGii", "please show up")
     }
 }

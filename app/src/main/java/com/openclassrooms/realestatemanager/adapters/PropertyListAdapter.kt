@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -34,6 +35,7 @@ class PropertyListAdapter(var properties: List<PropertyWithAllData>,
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
         val isSelected = position == itemSelected
         holder.updateWithProperty(properties[position], glide, currency, context, isDoubleScreen, isSelected)
+        Log.d("TAG", "WHERE IS THE ADAPTER??")
     }
 
     fun update(properties: List<PropertyWithAllData>) {
@@ -80,7 +82,7 @@ class PropertyViewHolder(private val binding: ItemPropertyBinding) : RecyclerVie
         this.isSelected = isSelected
         this.context = context
         isSold = property.property.isSold
-
+Log.d("TAG", "call?")
         binding.image.setImageResource(R.drawable.home)
 
         binding.type.text = property.property.type

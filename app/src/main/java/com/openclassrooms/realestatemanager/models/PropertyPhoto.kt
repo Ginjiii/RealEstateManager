@@ -8,24 +8,24 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "properties_photos",
-        foreignKeys = [
-            ForeignKey(
-                    entity = Property::class,
-                    parentColumns = ["properties_id"],
-                    childColumns = ["property_id"],
-                    onDelete = ForeignKey.CASCADE)
-        ])
-@Parcelize
+//@Entity(tableName = "properties_photos",
+//        foreignKeys = [
+//            ForeignKey(
+//                    entity = Property::class,
+//                    parentColumns = ["properties_id"],
+//                    childColumns = ["property_id"],
+//                    onDelete = ForeignKey.CASCADE)
+//        ])
+//@Parcelize
 data class PropertyPhoto(
         var filename: String = "",
         var label: String = "",
-        @ColumnInfo(name = "property_id")
-        var propertyId: Int
+//        @ColumnInfo(name = "property_id")
+        var propertyId: Int,
 
-) : Parcelable {
-    @IgnoredOnParcel
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "properties_photos_id")
-    var id: Int = 0
-}
+//) : Parcelable {
+//    @IgnoredOnParcel
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "properties_photos_id")
+    var id: Int = 0)
+//}

@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.ArrayList
 
-@Entity(
-        tableName = "properties",
-        foreignKeys = [ForeignKey(entity = Agent::class, parentColumns = ["agents_id"], childColumns = ["agent_id"])])
-@Parcelize
+//@Entity(
+//        tableName = "properties",
+//        foreignKeys = [ForeignKey(entity = Agent::class, parentColumns = ["agents_id"], childColumns = ["agent_id"])])
+//@Parcelize
 data class Property(
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "properties_id")
+//        @PrimaryKey(autoGenerate = true)
+//        @ColumnInfo(name = "properties_id")
         var id: Int = 0,
         var type: String,
         var priceInDollars: Int,
@@ -27,12 +27,12 @@ data class Property(
         var postcode: String,
         var city: String,
         var country: String,
-        var poi: ArrayList<Boolean> = ArrayList(),
+       // var poi: ArrayList<Boolean> = ArrayList(),
         var isSold: Boolean = false,
         var availableDate: String,
         var soldDate: String = "",
-        @ColumnInfo(name = "agent_id")
+//        @ColumnInfo(name = "agent_id")
         var agentId: Int,
         var coverPhoto: String,
-        var labelPhoto: String
-) : Parcelable
+        var labelPhoto: String)
+//) : Parcelable
