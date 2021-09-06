@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:padding="10dp"
-    tools:context=".ui.fragments.AddFragment">
+    tools:context=".ui.fragments.AddAgentFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/photo"

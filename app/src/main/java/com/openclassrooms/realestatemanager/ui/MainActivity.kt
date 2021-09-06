@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private val mainBinding get() = binding!!
 
+    var isDoubleScreenMode = false
+
     private var detailsView: PropertyDetailFragment? = null
     private lateinit var rfabHelper: RapidFloatingActionHelper
 
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         mIsDualPane = fragmentDetailFragment?.visibility == View.VISIBLE
 
         configureScreenMode()
+        showDetailsView()
         setupBottomNavigation(binding)
 //        configureRapidFloatingActionButton()
     }
@@ -154,14 +157,5 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.right_screen, detailsView!!)
             .commit()
-    }
-
-    fun openDetailsProperty(){
-
-        if(mIsDualPane){
-            showDetailsView()
-        } else{
-            val intent = Intent(this, PropertyDetailFragment::class.java)
-        }
     }
 }

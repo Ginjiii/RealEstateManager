@@ -15,6 +15,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBind
 import com.openclassrooms.realestatemanager.models.Agent
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.PropertyWithAllData
+import com.openclassrooms.realestatemanager.ui.MainActivity
 import com.openclassrooms.realestatemanager.utils.Currency
 
 
@@ -45,7 +46,14 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     ): View {
         fragmentPropertyListBinding =
             FragmentPropertyListBinding.inflate(inflater, container, false)
+
+        checkScreenMode()
         return binding.root
+    }
+
+    override fun onResume(){
+        super.onResume()
+        if (!isDoubleScreenMode) propertyListAdapter?.updateSelection(null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -100,8 +108,9 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("TAGii", "please show up")
+    private fun checkScreenMode(){
+        if(activity is MainActivity){
+            isDoubleScreenMode = (activity as MainActivity).isDoubleScreenMode
+        }
     }
 }

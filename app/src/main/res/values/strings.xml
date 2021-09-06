@@ -69,4 +69,10 @@
     <string name="dialog_button_wifi">Wifi</string>
     <string name="dialog_button_data">Data</string>
     <string name="add_agent_menu">Add agent</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="storage_perm_request">App need storage permission</string>
+    <string name="allow_storage">Please, allow storage permission to add pictures</string>
 </resources>
