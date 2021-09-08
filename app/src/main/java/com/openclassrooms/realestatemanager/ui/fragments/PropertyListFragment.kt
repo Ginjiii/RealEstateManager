@@ -6,13 +6,12 @@ import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapters.PropertyListAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBinding
-import com.openclassrooms.realestatemanager.models.Agent
+import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.PropertyWithAllData
 import com.openclassrooms.realestatemanager.ui.MainActivity

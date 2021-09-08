@@ -1,30 +1,33 @@
 package com.openclassrooms.realestatemanager.ui
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.ListFragment
 import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
-import com.openclassrooms.realestatemanager.databinding.FragmentMapBinding
 import com.openclassrooms.realestatemanager.ui.fragments.*
+import com.openclassrooms.realestatemanager.utils.RC_CODE_ADD_AGENT
+import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList
 import com.wangjie.rapidfloatingactionbutton.util.RFABTextUtil
+import pub.devrel.easypermissions.EasyPermissions
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener<RFACLabelItem<Int>>, EasyPermissions.PermissionCallbacks {
 
     private var mIsDualPane = false
     private var menuToolbar: Menu? = null
-    private var binding: ActivityMainBinding? = null
-    private val mainBinding get() = binding!!
+    private lateinit var binding: ActivityMainBinding
 
     var isDoubleScreenMode = false
 
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val fragmentDetailFragment = binding.rightScreen
@@ -44,7 +47,34 @@ class MainActivity : AppCompatActivity() {
         configureScreenMode()
         showDetailsView()
         setupBottomNavigation(binding)
-//        configureRapidFloatingActionButton()
+        configureRapidFloatingActionButton()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when(requestCode){
+            RC_CODE_ADD_AGENT -> {
+                if(resultCode == Activity.RESULT_OK){
+                    Toast.makeText(this, "Agent added to the database", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        Toast.makeText(this, "Allow storage permission to add pictures", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        if(requestCode == RC_IMAGE_PERMS)
+            Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
+
     }
 
     // Setup Bottom Navigation
@@ -108,10 +138,10 @@ class MainActivity : AppCompatActivity() {
 
     //------Floating button---------
 
-//    private fun configureRapidFloatingActionButton() {
-//        val rfaContent = RapidFloatingActionContentLabelList(applicationContext)
-//        rfaContent.setOnRapidFloatingActionContentLabelListListener(this)
-//        val items = mutableListOf<RFACLabelItem<Int>>()
+    private fun configureRapidFloatingActionButton() {
+        val rfaContent = RapidFloatingActionContentLabelList(applicationContext)
+        rfaContent.setOnRapidFloatingActionContentLabelListListener(this)
+        val items = mutableListOf<RFACLabelItem<Int>>()
 //        items.add(
 //            RFACLabelItem<Int>()
 //            .setLabel(getString(R.string.add_new_property))
@@ -120,35 +150,25 @@ class MainActivity : AppCompatActivity() {
 //            .setIconPressedColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
 //            .setWrapper(0)
 //        )
-//        items.add(
-//            RFACLabelItem<Int>()
-//
-//            .setLabel(getString(R.string.add_agent_menu))
-//            .setResId(R.drawable.username)
-//            .setIconNormalColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
-//            .setIconPressedColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
-//            .setWrapper(1)
-//        )
-//        rfaContent
-//            .setItems(items as List<RFACLabelItem<Any>>?)
-//            .setIconShadowRadius(RFABTextUtil.dip2px(applicationContext, 3F))
-//            .setIconShadowColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-//            .setIconShadowDy(RFABTextUtil.dip2px(applicationContext, 3F))
-//        rfabHelper = RapidFloatingActionHelper(
-//            applicationContext,
-//            binding?.activityMainRfal,
-//            binding?.activityMainRfab,
-//            rfaContent
-//        ).build()
-//    }
-//
-//    override fun onRFACItemIconClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
-//        TODO("Not yet implemented")
-//    }
+        items.add(RFACLabelItem<Int>()
+            .setLabel(getString(R.string.add_agent_menu))
+            .setResId(R.drawable.username)
+            .setIconNormalColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
+            .setIconPressedColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
+            .setWrapper(1)
+        )
+        rfaContent
+            .setItems(items as List<RFACLabelItem<Any>>?)
+            .setIconShadowRadius(RFABTextUtil.dip2px(applicationContext, 3F))
+            .setIconShadowColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+            .setIconShadowDy(RFABTextUtil.dip2px(applicationContext, 3F))
+        rfabHelper = RapidFloatingActionHelper(
+            applicationContext,
+            binding?.activityMainRfal,
+            binding?.activityMainRfab,
+            rfaContent
+        ).build()
+    }
 
     //------2 views mode---------
     private fun showDetailsView(){
@@ -157,5 +177,26 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.right_screen, detailsView!!)
             .commit()
+    }
+
+    override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
+        when(position){
+            1 -> {
+                showAddAgentFragment()
+            } else -> {
+            Toast.makeText(this, "You need internet to add an agent", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        rfabHelper.toggleContent()
+    }
+
+    override fun onRFACItemIconClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
+        onRFACItemIconClick(position, item)
+    }
+
+    private fun showAddAgentFragment(){
+        val intent = Intent(this, AddAgentFragment::class.java)
+        startActivityForResult(intent, RC_CODE_ADD_AGENT)
     }
 }

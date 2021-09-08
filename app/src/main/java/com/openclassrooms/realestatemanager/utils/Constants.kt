@@ -19,6 +19,9 @@ const val RC_LOCATION_PERMS = 106
 const val RC_CODE_TAKE_PHOTO = 107
 const val RC_CODE_DETAIL_PROPERTY = 108
 
+// TABLE NAME
+const val AGENT_TABLE_NAME = "agents"
+
 // PERMISSIONS
 const val PERMS_LOCALISATION = Manifest.permission.ACCESS_FINE_LOCATION
 const val PERMS_EXT_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE

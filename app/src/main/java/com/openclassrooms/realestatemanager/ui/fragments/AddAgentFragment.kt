@@ -13,13 +13,17 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.injections.Injection
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAgentBinding
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAgentBinding.*
 import com.openclassrooms.realestatemanager.databinding.FragmentLoanBinding
+import com.openclassrooms.realestatemanager.ui.viewModels.AddAgentViewModel
 import com.openclassrooms.realestatemanager.utils.IMAGE_ONLY_TYPE
 import com.openclassrooms.realestatemanager.utils.PERMS_EXT_STORAGE
 import com.openclassrooms.realestatemanager.utils.RC_CHOOSE_PHOTO
@@ -32,13 +36,19 @@ class AddAgentFragment : Fragment(),EasyPermissions.PermissionCallbacks{
     private var fragmentAddAgentBinding: FragmentAddAgentBinding? = null
     private val binding get() = fragmentAddAgentBinding!!
 
+    private lateinit var viewModel: AddAgentViewModel
+
     private var uriProfileImage: String? = null
     private var urlInDevice: String? = null
 
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View {
         fragmentAddAgentBinding = FragmentAddAgentBinding.inflate(inflater, container, false)
+        configureViewModel()
         return binding.root
     }
 
@@ -76,6 +86,17 @@ class AddAgentFragment : Fragment(),EasyPermissions.PermissionCallbacks{
         }
 
         return true
+    }
+
+    // VIEW MODEL CONNECTION
+
+     fun configureViewModel(){
+        val viewModelFactory = Injection.providesViewModelFactory(requireActivity().applicationContext)
+        viewModel = ViewModelProviders.of(
+            this,
+            viewModelFactory
+        ).get(AddAgentViewModel::class.java)
+
     }
 
     fun intentSinglePicture(): Intent{
