@@ -1,79 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    tools:context=".ui.MainActivity"
+    android:layout_height="match_parent" android:layout_width="match_parent"
     android:id="@+id/activity_main_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    xmlns:rfal="http://schemas.android.com/apk/res-auto"
+    xmlns:rfab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:id="@+id/main_activity_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" layout="@layout/toolbar"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_height="0dp" android:layout_width="0dp"
+        android:id="@+id/main_activity_container_view"
+        app:layout_constraintStart_toStartOf="@id/main_activity_toolbar"
+        app:layout_constraintEnd_toEndOf="@id/main_activity_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/main_activity_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/bottom_nav_view"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemTextColor="@color/custom_bottom_nav_choice"
+        app:itemIconTint="@color/custom_bottom_nav_choice"/>
 
-        <include
-            android:id="@+id/main_activity_toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="0dp"
+    <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
+        android:layout_height="0dp" android:layout_width="0dp"
+        android:id="@+id/activity_main_rfal"
+        rfal:layout_constraintTop_toTopOf="@id/main_activity_container_view"
+        rfal:layout_constraintStart_toStartOf="@id/main_activity_container_view"
+        app:layout_constraintEnd_toEndOf="@id/main_activity_container_view"
+        rfal:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+        rfal:rfal_frame_color="#ffffff" rfal:rfal_frame_alpha="0.7">
+
+        <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/main_activity_container_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_activity_toolbar"
-            app:layout_constraintStart_toStartOf="@id/main_activity_toolbar"
-            app:layout_constraintEnd_toEndOf="@id/main_activity_toolbar"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/custom_bottom_nav_choice"
-            app:itemTextColor="@color/custom_bottom_nav_choice"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
-
-        <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
-            xmlns:rfal="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/activity_main_rfal"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            rfal:rfal_frame_color="#ffffff"
-            rfal:rfal_frame_alpha="0.7"
-            rfal:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
-            app:layout_constraintEnd_toEndOf="@id/main_activity_container_view"
-            rfal:layout_constraintStart_toStartOf="@id/main_activity_container_view"
-            rfal:layout_constraintTop_toTopOf="@id/main_activity_container_view">
-
-            <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
-                xmlns:rfab="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/activity_main_rfab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:padding="12dp"
-                rfab:rfab_size="normal"
-                rfab:rfab_drawable="@drawable/ic_baseline_add_24"
-                rfab:rfab_color_normal="@color/colorAccent"
-                rfab:rfab_color_pressed="@color/colorAccentDark"
-                rfab:rfab_shadow_radius="12dp"
-                rfab:rfab_shadow_color="@color/colorPrimary"
-                rfab:rfab_shadow_dx="0dp"
-                rfab:rfab_shadow_dy="5dp"
-                />
+            android:layout_width="wrap_content"
+            android:id="@+id/activity_main_rfab"
+            rfab:rfab_size="normal"
+            rfab:rfab_drawable="@drawable/ic_baseline_add_24"
+            rfab:rfab_color_pressed="@color/colorAccentDark"
+            rfab:rfab_color_normal="@color/colorAccent"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
         </com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>

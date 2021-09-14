@@ -29,6 +29,10 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
         <activity
+            android:name=".ui.addAgent.AddAgentActivity"
+            android:label="@string/add_agent"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">

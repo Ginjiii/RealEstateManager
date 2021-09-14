@@ -75,4 +75,6 @@
     <string name="phone_number">Phone number</string>
     <string name="storage_perm_request">App need storage permission</string>
     <string name="allow_storage">Please, allow storage permission to add pictures</string>
+    <string name="validate_menu">Validate</string>
+    <string name="add_agent">Add Agent</string>
 </resources>

@@ -1,10 +1,9 @@
-package com.openclassrooms.realestatemanager.ui.fragments
+package com.openclassrooms.realestatemanager.ui.addAgent
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +12,20 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.data.injections.Injection
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAgentBinding
-import com.openclassrooms.realestatemanager.databinding.FragmentAddAgentBinding.*
-import com.openclassrooms.realestatemanager.databinding.FragmentLoanBinding
 import com.openclassrooms.realestatemanager.ui.viewModels.AddAgentViewModel
 import com.openclassrooms.realestatemanager.utils.IMAGE_ONLY_TYPE
 import com.openclassrooms.realestatemanager.utils.PERMS_EXT_STORAGE
 import com.openclassrooms.realestatemanager.utils.RC_CHOOSE_PHOTO
 import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
+import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 

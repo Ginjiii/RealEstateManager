@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
+import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentActivity
+import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentFragment
 import com.openclassrooms.realestatemanager.ui.fragments.*
 import com.openclassrooms.realestatemanager.utils.RC_CODE_ADD_AGENT
 import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity(),
         mIsDualPane = fragmentDetailFragment?.visibility == View.VISIBLE
 
         configureScreenMode()
-        showDetailsView()
+//        showDetailsView()
         setupBottomNavigation(binding)
         configureRapidFloatingActionButton()
     }
@@ -142,14 +144,14 @@ class MainActivity : AppCompatActivity(),
         val rfaContent = RapidFloatingActionContentLabelList(applicationContext)
         rfaContent.setOnRapidFloatingActionContentLabelListListener(this)
         val items = mutableListOf<RFACLabelItem<Int>>()
-//        items.add(
-//            RFACLabelItem<Int>()
-//            .setLabel(getString(R.string.add_new_property))
-//            .setResId(R.drawable.home)
-//            .setIconNormalColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
-//            .setIconPressedColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
-//            .setWrapper(0)
-//        )
+        items.add(
+            RFACLabelItem<Int>()
+            .setLabel(getString(R.string.add_new_property))
+            .setResId(R.drawable.home)
+            .setIconNormalColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
+            .setIconPressedColor(ContextCompat.getColor(applicationContext, R.color.colorWhite))
+            .setWrapper(0)
+        )
         items.add(RFACLabelItem<Int>()
             .setLabel(getString(R.string.add_agent_menu))
             .setResId(R.drawable.username)
@@ -170,21 +172,10 @@ class MainActivity : AppCompatActivity(),
         ).build()
     }
 
-    //------2 views mode---------
-    private fun showDetailsView(){
-        detailsView = PropertyDetailFragment()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.right_screen, detailsView!!)
-            .commit()
-    }
-
     override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
         when(position){
             1 -> {
                 showAddAgentFragment()
-            } else -> {
-            Toast.makeText(this, "You need internet to add an agent", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -192,11 +183,22 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onRFACItemIconClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
-        onRFACItemIconClick(position, item)
+        onRFACItemLabelClick(position, item)
     }
 
+    //------2 views mode---------
+//    private fun showDetailsView() {
+//        Log.d("tagii", "showDetailsView")
+//        detailsView = PropertyDetailFragment()
+//        supportFragmentManager
+//            .beginTransaction()
+//            .replace(R.id.right_screen, detailsView!!)
+//            .commit()
+//    }
+
+
     private fun showAddAgentFragment(){
-        val intent = Intent(this, AddAgentFragment::class.java)
+        val intent = Intent(this, AddAgentActivity::class.java)
         startActivityForResult(intent, RC_CODE_ADD_AGENT)
     }
 }
