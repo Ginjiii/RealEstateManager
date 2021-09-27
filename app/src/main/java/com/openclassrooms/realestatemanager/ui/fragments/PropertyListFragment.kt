@@ -75,7 +75,7 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     }
 
     private fun updateDummyList(){
-        val agent = Agent("AAA", "BBB", "CCC" )
+        val agent = Agent(1,"AAA", "BBB", "CCC" )
         val property = Property(0,"abc", 0,0,0,0,0,"belle maison",
             "address", "91919191", "city", "FRANCE", true, "available date", "soldDate", 0, "photo", "photoLabel" )
         val propertyWithAllData = PropertyWithAllData(property, agent)

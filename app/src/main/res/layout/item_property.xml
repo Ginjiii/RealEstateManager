@@ -24,21 +24,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/not_supported" />
 
-        <com.haozhang.lib.SlantedTextView
-            android:id="@+id/sold_diagonal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:visibility="invisible"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:slantedBackgroundColor="#CEF80000"
-            app:slantedLength="40dp"
-            app:slantedMode="left"
-            app:slantedText="SOLD"
-            app:slantedTextColor="@color/colorWhite"
-            app:slantedTextSize="18sp" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type"
             android:layout_width="0dp"

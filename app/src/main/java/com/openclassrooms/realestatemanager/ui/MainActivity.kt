@@ -13,7 +13,6 @@ import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentActivity
-import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentFragment
 import com.openclassrooms.realestatemanager.ui.fragments.*
 import com.openclassrooms.realestatemanager.utils.RC_CODE_ADD_AGENT
 import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
@@ -175,7 +174,7 @@ class MainActivity : AppCompatActivity(),
     override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
         when(position){
             1 -> {
-                showAddAgentFragment()
+                showAddAgentActivity()
             }
         }
 
@@ -197,7 +196,7 @@ class MainActivity : AppCompatActivity(),
 //    }
 
 
-    private fun showAddAgentFragment(){
+    private fun showAddAgentActivity(){
         val intent = Intent(this, AddAgentActivity::class.java)
         startActivityForResult(intent, RC_CODE_ADD_AGENT)
     }

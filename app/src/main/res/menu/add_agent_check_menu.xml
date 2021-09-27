@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_add_agent_activity_check"
         android:icon="@drawable/check"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/validate_menu"/>
 
 </menu>

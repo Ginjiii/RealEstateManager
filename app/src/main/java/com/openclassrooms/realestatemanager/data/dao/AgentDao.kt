@@ -8,6 +8,10 @@ import androidx.room.Query
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.utils.AGENT_TABLE_NAME
 import kotlinx.coroutines.flow.Flow
+import androidx.lifecycle.LiveData
+
+
+
 
 @Dao
 interface AgentDao {
@@ -20,13 +24,7 @@ interface AgentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createAgent(agent: Agent)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createAgents(agents: List<Agent>)
+    @Query("SELECT COUNT(*) FROM $AGENT_TABLE_NAME")
+    fun getRowCount(): LiveData<Int>
 
-
-    @Query("SELECT * FROM $AGENT_TABLE_NAME WHERE agent_id = :agentId")
-    fun getAgentWithCursor(agentId: String): Cursor
-
-    @Query("SELECT * FROM $AGENT_TABLE_NAME")
-    fun getAllAgentsWithCursor(): Cursor
 }

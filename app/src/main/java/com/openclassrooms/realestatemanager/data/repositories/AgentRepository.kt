@@ -14,22 +14,10 @@ class AgentRepository (private val agentDao: AgentDao) {
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
+//    @Suppress("RedundantSuspendModifier")
+//    @WorkerThread
     suspend fun insert(agent: Agent) {
         agentDao.createAgent(agent)
     }
 
-    companion object{
-        @Volatile
-        private var INSTANCE: AgentRepository? = null
-        fun getAgentRepository(agentDao: AgentDao): AgentRepository {
-            return INSTANCE
-                ?: synchronized(this){
-                    val instance = AgentRepository(agentDao)
-                    INSTANCE = instance
-                    return instance
-                }
-        }
-    }
 }
