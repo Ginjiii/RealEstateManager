@@ -1,15 +1,17 @@
 package com.openclassrooms.realestatemanager.ui.addProperties
 
 
+import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.RealEstateManagerApp
 import com.openclassrooms.realestatemanager.databinding.ActivityAddPropertyBinding
@@ -17,11 +19,16 @@ import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.utils.ACTION_TYPE_ADD_PROPERTY
 import com.openclassrooms.realestatemanager.utils.Utils
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddPropertyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPropertyBinding
     private lateinit var actionType: String
+
+    private var formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+
 
     private val addPropertyViewModel: AddPropertyViewModel by viewModels {
         AddPropertyViewModelFactory((application as RealEstateManagerApp).repository)
@@ -46,7 +53,12 @@ class AddPropertyActivity : AppCompatActivity() {
         setupRoomsSpinner()
 
         binding.buttonAddProperty.setOnClickListener {
+            showDatePickerDialog(binding.availableDate )
             confirmValidation()
+        }
+
+        binding.addPropertyViewAddPictureButton.setOnClickListener {
+
         }
     }
 
@@ -165,5 +177,55 @@ class AddPropertyActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+
+        binding.bedroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent!!.getItemAtPosition(position)
+                val text = selectedItem.toString()
+                bedroom = text.replace("+", "").toInt()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
+        binding.bathroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent!!.getItemAtPosition(position)
+                val text = selectedItem.toString()
+                bathroom = text.replace("+", "").toInt()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+    }
+
+    // Setup DatePicker
+    private fun showDatePickerDialog(editText: AppCompatEditText) {
+        val getDate = Calendar.getInstance()
+        val datePicker = DatePickerDialog(
+            applicationContext,
+            { _, year, month, day ->
+
+                val selectDate = Calendar.getInstance()
+                selectDate.set(Calendar.YEAR, year)
+                selectDate.set(Calendar.MONTH, month)
+                selectDate.set(Calendar.DAY_OF_MONTH, day)
+
+                val date = formatDate.format(selectDate.time)
+                editText.setText(date)
+
+            },
+            getDate.get(Calendar.YEAR),
+            getDate.get(Calendar.MONTH),
+            getDate.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+
+        datePicker.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(applicationContext, R.color.colorAccent))
+        datePicker.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(applicationContext, R.color.colorAccent))
     }
 }

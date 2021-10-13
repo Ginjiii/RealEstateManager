@@ -2,4 +2,5 @@
 <resources>
     <string name="button_add_agent">Add Agent</string>
     <string name="add_property_title">Add Property</string>
+    <string name="button_add_property">Add property</string>
 </resources>

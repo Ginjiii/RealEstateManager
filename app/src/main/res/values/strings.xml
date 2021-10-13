@@ -79,6 +79,9 @@
     <string name="add_agent">Add Agent</string>
     <string name="button_add_agent">Add Agent</string>
     <string name="add_property_title">Add Property</string>
+    <string name="manage_by">Manage by</string>
+    <string name="button_add_property">Add property</string>
+    <string name="add_photos">ADD PICTURES</string>
 
     <string-array name="type_of_properties">
         <item>Type</item>

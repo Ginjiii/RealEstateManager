@@ -30,6 +30,7 @@ const val ACTION_TYPE_LIST_PROPERTY = "ActionTypeListProperty"
 // TABLE NAME
 const val AGENT_TABLE_NAME = "agents"
 const val PROPERTY_TABLE_NAME = "properties"
+const val PHOTO_TABLE_NAME = "pictures"
 
 // PERMISSIONS
 const val PERMS_LOCALISATION = Manifest.permission.ACCESS_FINE_LOCATION
