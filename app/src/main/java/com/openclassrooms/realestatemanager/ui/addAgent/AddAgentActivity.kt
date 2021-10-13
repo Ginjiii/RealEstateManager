@@ -1,35 +1,28 @@
 package com.openclassrooms.realestatemanager.ui.addAgent
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import android.widget.TextView
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import com.google.android.material.snackbar.Snackbar
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.RealEstateManagerApp
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.databinding.ActivityAddAgentBinding
 import com.openclassrooms.realestatemanager.ui.viewModels.AddAgentViewModel
 import com.openclassrooms.realestatemanager.ui.viewModels.AddAgentViewModelFactory
-import com.openclassrooms.realestatemanager.utils.IMAGE_ONLY_TYPE
-import com.openclassrooms.realestatemanager.utils.PERMS_EXT_STORAGE
-import com.openclassrooms.realestatemanager.utils.RC_CHOOSE_PHOTO
-import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
+import com.openclassrooms.realestatemanager.utils.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
 class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
-    private var addAgentActivity: AddAgentActivity? = null
 
-    private lateinit var activityAddAgentBinding: ActivityAddAgentBinding
+    private lateinit var binding: ActivityAddAgentBinding
 
     private val addAgentViewModel: AddAgentViewModel by viewModels {
         AddAgentViewModelFactory((application as RealEstateManagerApp).repository)
@@ -40,10 +33,16 @@ class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityAddAgentBinding = ActivityAddAgentBinding.inflate(layoutInflater)
-        setContentView(activityAddAgentBinding.root)
-        configureToolbar()
-        createAgent()
+
+        binding = ActivityAddAgentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.buttonAddAgent.setOnClickListener {
+            saveAgent()
+        }
+        binding.addAgentViewPictureAgent.setOnClickListener {
+            chooseProfilePictureFromPhone()
+        }
     }
 
     // VIEW MODEL CONNECTION
@@ -55,68 +54,46 @@ class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallback
         }
     }
 
-
-//    private fun savePicturePicked(data: Intent){
-//        urlInDevice = data.data?.toString()
-//        Glide.with(applicationContext)
-//            .load(uriProfileImage)
-//            .apply(RequestOptions.circleCropTransform())
-//            .into(binding.addAgentViewPictureAgent)
-//
-//    }
-
-    fun createAgent() {
-        addAgentViewModel.insert(Agent(1, "AAA", "BBB", "CCC"))
+    private fun saveAgent(){
+        val agent = Agent(firstName = binding.addAgentViewFirstname.text.toString(),
+            lastName = binding.addAgentViewLastname.text.toString(),
+            email = binding.addAgentViewEmail.text.toString(),
+            phoneNumber = binding.addAgentViewPhonenb.text.toString())
+        addAgentViewModel.insert(agent)
+        Toast.makeText(this, "Agent added", Toast.LENGTH_LONG)
+            .show()
     }
 
-    private fun showSnackBarMessage(message: String) {
-        val viewLayout = findViewById<CoordinatorLayout>(R.id.activity_main_layout)
-        showSnackBar(viewLayout, message)
+
+    private fun savePicturePicked(data: Intent){
+        urlInDevice = data.data?.toString()
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data.data)
+        val uriInternal = bitmap.saveToInternalStorage(
+          applicationContext, generateName(), TypeImage.AGENT
+        )
+        uriProfileImage = uriInternal.toString()
+        Glide.with(applicationContext)
+            .load(uriProfileImage)
+            .apply(RequestOptions.circleCropTransform())
+            .into(binding.addAgentViewPictureAgent)
 
     }
 
-    fun showSnackBar(view: View, message: String) {
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG).apply {
-            config(view.context)
-            getView().findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines =
-                5
-            show()
-        }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    fun Snackbar.config(context: Context) {
-        val params = this.view.layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(12, 12, 12, 12)
-        this.view.layoutParams = params
-
-        this.view.background = ContextCompat.getDrawable(context, R.drawable.bg_snackbar)
-
-        ViewCompat.setElevation(this.view, 6f)
-    }
-
-    private fun configureToolbar() {
-        setSupportActionBar(activityAddAgentBinding.mainActivityToolbar.toolbar)
-        val actionBar = supportActionBar
-        actionBar?.setHomeAsUpIndicator(R.drawable.close)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_agent_check_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.menu_add_agent_activity_check -> {
-//                activityAddAgentBinding.mainActivityToolbar.toolbar.setOnClickListener()
-                Toast.makeText(this, "Agent added", Toast.LENGTH_LONG)
-                    .show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == RC_CHOOSE_PHOTO){
+            if(resultCode == RESULT_OK){
+                data?.let{
+                    savePicturePicked(it)
+                }
             }
         }
-        return super.onOptionsItemSelected(item)
     }
-
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         if (requestCode == RC_IMAGE_PERMS) chooseProfilePictureFromPhone()
@@ -146,6 +123,6 @@ class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallback
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        showSnackBarMessage(getString(R.string.allow_storage))
+        Toast.makeText(this, "Allow storage", Toast.LENGTH_LONG).show()
     }
 }

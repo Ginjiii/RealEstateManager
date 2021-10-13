@@ -5,15 +5,17 @@
       <map>
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/bg_snackbar.xml" value="0.3671794871794872" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout-sw600dp-land/activity_main.xml" value="0.17" />
-        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add_agent.xml" value="0.1515625" />
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add_agent.xml" value="0.25" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_main.xml" value="0.17350557244174267" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_second.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_agent.xml" value="0.3567708333333333" />
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_property.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_map.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_maps.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_property_detail.xml" value="0.25" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_property_list.xml" value="0.19635416666666666" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/item_property.xml" value="0.3567708333333333" />
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/toolbar.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/menu/add_agent_check_menu.xml" value="0.19635416666666666" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19635416666666666" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/menu/toolbar.xml" value="0.3567708333333333" />

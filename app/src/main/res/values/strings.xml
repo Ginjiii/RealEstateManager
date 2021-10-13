@@ -77,4 +77,5 @@
     <string name="allow_storage">Please, allow storage permission to add pictures</string>
     <string name="validate_menu">Validate</string>
     <string name="add_agent">Add Agent</string>
+    <string name="button_add_agent">Add Agent</string>
 </resources>

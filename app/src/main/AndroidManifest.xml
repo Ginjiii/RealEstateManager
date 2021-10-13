@@ -43,9 +43,6 @@
             android:name=".ui.addAgent.AddAgentActivity"
             android:label="@string/add_agent"
             android:parentActivityName=".ui.MainActivity" >
-            <meta-data
-                android:name=":toolbar"
-                android:value="@id/menu_add_agent_activity_check"/>
         </activity>
 
 
