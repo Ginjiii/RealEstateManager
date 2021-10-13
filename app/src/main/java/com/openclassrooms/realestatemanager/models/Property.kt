@@ -1,12 +1,25 @@
 package com.openclassrooms.realestatemanager.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
+import com.openclassrooms.realestatemanager.data.Agent
+import com.openclassrooms.realestatemanager.utils.PROPERTY_TABLE_NAME
 
 
+@Entity(
+        tableName = PROPERTY_TABLE_NAME,
+        foreignKeys = [
+                ForeignKey(
+                        entity = Agent::class,
+                        parentColumns = ["agent_id"],
+                        childColumns = ["agent"],
+                        onDelete = ForeignKey.NO_ACTION)])
 
 data class Property(
-
-        var id: Int = 0,
-        var type: String,
+        @ColumnInfo(name = "property_id") @PrimaryKey var id: String = "",
+        @ColumnInfo(name = "type_property")var type:  TypeProperty = TypeProperty.HOUSE,
         var priceInDollars: Int,
         var areaInMeters: Int = 0,
         var nbrRoom: Int = 0,
@@ -23,3 +36,12 @@ data class Property(
         var agentId: Int,
         var coverPhoto: String,
         var labelPhoto: String)
+
+enum class TypeProperty(val typeName: String) {
+        FLAT("Flat"),
+        TOWNHOUSE("Townhouse"),
+        PENTHOUSE("Penthouse"),
+        HOUSE("House"),
+        DUPLEX("Duplex")
+
+}

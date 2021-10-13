@@ -45,6 +45,11 @@
             android:parentActivityName=".ui.MainActivity" >
         </activity>
 
+        <activity
+            android:name=".ui.addProperties.AddPropertyActivity"
+            android:label="@string/add_property_title" />
+
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

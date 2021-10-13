@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="button_add_agent">Add Agent</string>
+    <string name="add_property_title">Add Property</string>
 </resources>

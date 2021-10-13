@@ -85,7 +85,7 @@ class PropertyViewHolder(private val binding: ItemPropertyBinding) : RecyclerVie
 Log.d("TAG", "call?")
         binding.image.setImageResource(R.drawable.home)
 
-        binding.type.text = property.property.type
+        binding.type.text = property.property.type.typeName
         binding.city.text = property.property.street[0].toString()
         binding.price.text = when (currency) {
             Currency.EURO -> "${Utils.convertEuroToDollar(property.property.priceInDollars)}€"

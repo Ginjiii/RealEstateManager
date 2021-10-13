@@ -78,4 +78,28 @@
     <string name="validate_menu">Validate</string>
     <string name="add_agent">Add Agent</string>
     <string name="button_add_agent">Add Agent</string>
+    <string name="add_property_title">Add Property</string>
+
+    <string-array name="type_of_properties">
+        <item>Type</item>
+        <item>Flat</item>
+        <item>Penthouse</item>
+        <item>Duplex</item>
+        <item>Villa</item>
+        <item>Manor</item>
+    </string-array>
+
+    <string-array name="number_of_rooms">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10+</item>
+    </string-array>
 </resources>

@@ -13,6 +13,7 @@ import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentActivity
+import com.openclassrooms.realestatemanager.ui.addProperties.AddPropertyActivity
 import com.openclassrooms.realestatemanager.ui.fragments.*
 import com.openclassrooms.realestatemanager.utils.RC_CODE_ADD_AGENT
 import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
@@ -51,17 +52,17 @@ class MainActivity : AppCompatActivity(),
         configureRapidFloatingActionButton()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when(requestCode){
-            RC_CODE_ADD_AGENT -> {
-                if(resultCode == Activity.RESULT_OK){
-                    Toast.makeText(this, "Agent added to the database", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        when(requestCode){
+//            RC_CODE_ADD_AGENT -> {
+//                if(resultCode == Activity.RESULT_OK){
+//                    Toast.makeText(this, "Agent added to the database", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -173,9 +174,9 @@ class MainActivity : AppCompatActivity(),
 
     override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
         when(position){
-            1 -> {
-                showAddAgentActivity()
-            }
+            0 -> showAddPropertyActivity()
+            1 -> showAddAgentActivity()
+
         }
 
         rfabHelper.toggleContent()
@@ -198,6 +199,11 @@ class MainActivity : AppCompatActivity(),
 
     private fun showAddAgentActivity(){
         val intent = Intent(this, AddAgentActivity::class.java)
-        startActivityForResult(intent, RC_CODE_ADD_AGENT)
+        startActivity(intent)
+    }
+
+    private fun showAddPropertyActivity(){
+        val intent = Intent(this, AddPropertyActivity::class.java)
+        startActivity(intent)
     }
 }

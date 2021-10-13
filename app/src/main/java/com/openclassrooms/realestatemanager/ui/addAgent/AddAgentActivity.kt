@@ -21,7 +21,6 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
-
     private lateinit var binding: ActivityAddAgentBinding
 
     private val addAgentViewModel: AddAgentViewModel by viewModels {

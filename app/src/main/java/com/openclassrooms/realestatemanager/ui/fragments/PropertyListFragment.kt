@@ -14,6 +14,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBind
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.PropertyWithAllData
+import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.ui.MainActivity
 import com.openclassrooms.realestatemanager.utils.Currency
 
@@ -76,7 +77,7 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
 
     private fun updateDummyList(){
         val agent = Agent( "BBB", "CCC","eee@rem.com","060000000" )
-        val property = Property(0,"abc", 0,0,0,0,0,"belle maison",
+        val property = Property("0",type = TypeProperty.HOUSE, 0,0,0,0,0,"belle maison",
             "address", "91919191", "city", "FRANCE", true, "available date", "soldDate", 0, "photo", "photoLabel" )
         val propertyWithAllData = PropertyWithAllData(property, agent)
 
