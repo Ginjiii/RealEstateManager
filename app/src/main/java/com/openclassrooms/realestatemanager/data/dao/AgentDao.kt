@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.data.dao
 
-import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -8,10 +7,6 @@ import androidx.room.Query
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.utils.AGENT_TABLE_NAME
 import kotlinx.coroutines.flow.Flow
-import androidx.lifecycle.LiveData
-
-
-
 
 @Dao
 interface AgentDao {
@@ -25,6 +20,6 @@ interface AgentDao {
     suspend fun createAgent(agent: Agent)
 
     @Query("SELECT COUNT(*) FROM $AGENT_TABLE_NAME")
-    fun getRowCount(): LiveData<Int>
+    fun getRowCount(): Int
 
 }

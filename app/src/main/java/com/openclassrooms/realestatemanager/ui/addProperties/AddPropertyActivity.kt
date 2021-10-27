@@ -2,11 +2,12 @@ package com.openclassrooms.realestatemanager.ui.addProperties
 
 
 import android.app.DatePickerDialog
-import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,6 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddPropertyBindi
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.utils.ACTION_TYPE_ADD_PROPERTY
-import com.openclassrooms.realestatemanager.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,37 +29,33 @@ class AddPropertyActivity : AppCompatActivity() {
 
     private var formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
 
-
-    private val addPropertyViewModel: AddPropertyViewModel by viewModels {
-        AddPropertyViewModelFactory((application as RealEstateManagerApp).repository)
-    }
-
     private var currentAgentId: Int = 0
+    private lateinit var agent: String
     private lateinit var type: String
     private var room: Int = 0
     private var bedroom: Int = 0
     private var bathroom: Int = 0
     private var croppedPhoto: String? = null
-    private lateinit var croppedPhotoUri: Uri
     private lateinit var labelPhoto: String
+
+    private val addPropertyViewModel: AddPropertyViewModel by viewModels {
+        AddPropertyViewModelFactory((application as RealEstateManagerApp).repository, (application as RealEstateManagerApp).agentRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPropertyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         configureActionType()
         setupTypeSpinner()
         setupRoomsSpinner()
 
-        binding.buttonAddProperty.setOnClickListener {
-            showDatePickerDialog(binding.availableDate )
-            confirmValidation()
-        }
+        binding.availableDate.setOnClickListener { showDatePickerDialog(binding.availableDate) }
+        binding.buttonAddProperty.setOnClickListener { addPropertyViewModel.checkAgent()
+        Log.d("Tagiii","" + addPropertyViewModel.checkAgent() )}
 
-        binding.addPropertyViewAddPictureButton.setOnClickListener {
-
-        }
     }
 
     private fun configureActionType() {
@@ -67,43 +63,43 @@ class AddPropertyActivity : AppCompatActivity() {
     }
 
     // Validate necessary fields
-    private fun confirmValidation() {
-        if (!validateType()
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
-        ) Toast.makeText(
-            applicationContext,
-            "Please fill all the required fields",
-            Toast.LENGTH_SHORT
-        ).show()
-        else saveProperty()
-    }
+//    private fun confirmValidation() {
+//        if (!validateType()
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
+//        ) Toast.makeText(
+//            applicationContext,
+//            "Please fill all the required fields",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//        else saveProperty()
+//    }
 
     // Validate property type spinner
-    private fun validateType(): Boolean {
-        val errorText: TextView = binding.spType.selectedView as TextView
-
-        return if (binding.spType.selectedItem.toString() == "Type") {
-            errorText.error = "Choose a type"
-            false
-        } else {
-            errorText.error = null
-            true
-        }
-    }
+//    private fun validateType(): Boolean {
+//        val errorText: TextView = binding.spType.selectedView as TextView
+//
+//        return if (binding.spType.selectedItem.toString() == "Type") {
+//            errorText.error = "Choose a type"
+//            false
+//        } else {
+//            errorText.error = null
+//            true
+//        }
+//    }
 
     private fun saveProperty() {
         val property = Property(
             type = TypeProperty.HOUSE,
             priceInDollars = binding.price.text.toString().toInt(),
             areaInMeters = binding.area.text.toString().toInt(),
-            nbrRoom = room,
-            nbrBedroom = bedroom,
-            nbrBathroom = bathroom,
+            nbrRoom = binding.room.text.toString().toInt(),
+            nbrBedroom = binding.bedroom.text.toString().toInt(),
+            nbrBathroom = binding.bathroom.text.toString().toInt(),
             description = binding.description.text.toString(),
             street = binding.street.text.toString(),
             postcode = binding.postcode.text.toString(),
@@ -112,8 +108,8 @@ class AddPropertyActivity : AppCompatActivity() {
             availableDate = binding.availableDate.text.toString(),
             agentId = currentAgentId,
             coverPhoto = croppedPhoto!!,
-            labelPhoto = labelPhoto
-        )
+            labelPhoto = labelPhoto,
+        agent = binding.addPropertyViewDropdownAgent.toString())
         addPropertyViewModel.insert(property)
         Toast.makeText(this, "Property added", Toast.LENGTH_LONG)
             .show()
@@ -178,27 +174,39 @@ class AddPropertyActivity : AppCompatActivity() {
             }
         }
 
-        binding.bedroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position)
-                val text = selectedItem.toString()
-                bedroom = text.replace("+", "").toInt()
+        binding.bedroomSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedItem = parent!!.getItemAtPosition(position)
+                    val text = selectedItem.toString()
+                    bedroom = text.replace("+", "").toInt()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
+        binding.bathroomSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedItem = parent!!.getItemAtPosition(position)
+                    val text = selectedItem.toString()
+                    bathroom = text.replace("+", "").toInt()
+                }
 
-        binding.bathroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position)
-                val text = selectedItem.toString()
-                bathroom = text.replace("+", "").toInt()
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
     }
 
     // Setup DatePicker

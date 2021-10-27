@@ -6,20 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.data.dao.AgentDao
-import kotlinx.coroutines.CoroutineScope
+import com.openclassrooms.realestatemanager.data.dao.PropertyDao
+import com.openclassrooms.realestatemanager.models.Property
 
 
-@Database(entities = [Agent::class], version = 1, exportSchema = false)
+@Database(entities = [Agent::class, Property::class], version = 1, exportSchema = false)
 
 abstract class RealEstateManagerDatabase : RoomDatabase() {
 
     abstract fun agentDao(): AgentDao
+    abstract fun propertyDao(): PropertyDao
 
     companion object {
         @Volatile
         private var INSTANCE: RealEstateManagerDatabase? = null
 
-        fun getDatabase(context: Context, applicationScope: CoroutineScope): RealEstateManagerDatabase {
+        fun getDatabase(context: Context): RealEstateManagerDatabase {
             return INSTANCE ?: synchronized(this) {
                     val instance = Room.databaseBuilder(
                         context.applicationContext,

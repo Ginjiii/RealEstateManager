@@ -1,14 +1,14 @@
 package com.openclassrooms.realestatemanager.ui.addProperties
 
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.data.repositories.AgentRepository
 import com.openclassrooms.realestatemanager.data.repositories.PropertyRepository
 import com.openclassrooms.realestatemanager.models.Property
-import com.openclassrooms.realestatemanager.ui.viewModels.AddAgentViewModel
 import kotlinx.coroutines.launch
 
-class AddPropertyViewModel(private val repository: PropertyRepository) : ViewModel() {
+class AddPropertyViewModel(private val repository: PropertyRepository, private val agentRepository: AgentRepository) : ViewModel() {
+
+
 
     val allProperties: LiveData<List<Property>> = repository.allProperties.asLiveData()
 
@@ -18,13 +18,17 @@ class AddPropertyViewModel(private val repository: PropertyRepository) : ViewMod
     fun insert(property: Property) = viewModelScope.launch {
         repository.insert(property)
     }
+
+    fun checkAgent() = viewModelScope.launch {
+        agentRepository.getCountAgent() > 0
+    }
 }
 
-class AddPropertyViewModelFactory(private val repository: AgentRepository) : ViewModelProvider.Factory {
+class AddPropertyViewModelFactory(private val repository: PropertyRepository, private val agentRepository: AgentRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AddAgentViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(AddPropertyViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return AddAgentViewModel(repository) as T
+            return AddPropertyViewModel(repository, agentRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

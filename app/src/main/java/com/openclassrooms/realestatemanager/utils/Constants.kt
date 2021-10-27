@@ -7,6 +7,8 @@ const val MAX_VALUE = 999999999999.99
 const val MIN_VALUE = 0.0
 const val IMAGE_ONLY_TYPE = "image/*"
 
+const val SHARED_PREFERENCES_USERNAME = "username"
+
 //DATE FORMAT
 const val DATE_FORMAT_FOR_NAME = "yyyyMMdd_HHmmss"
 

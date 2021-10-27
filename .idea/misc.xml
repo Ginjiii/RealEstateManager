@@ -3,14 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/add_a_photo_24.xml" value="0.3729166666666667" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/bg_snackbar.xml" value="0.3671794871794872" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/custom_button_background.xml" value="0.3416666666666667" />
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/ic_baseline_add_photo_alternate_24.xml" value="0.3729166666666667" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.3729166666666667" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout-sw600dp-land/activity_main.xml" value="0.17" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add_agent.xml" value="0.25" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_add_property.xml" value="0.33" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_main.xml" value="0.17350557244174267" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/activity_second.xml" value="0.3567708333333333" />
+        <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/dialog_photo_source.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_agent.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_add_property.xml" value="0.3567708333333333" />
         <entry key="..\:/Openclassrooms/RealEstateManager/RealEstateManager/app/src/main/res/layout/fragment_map.xml" value="0.3567708333333333" />

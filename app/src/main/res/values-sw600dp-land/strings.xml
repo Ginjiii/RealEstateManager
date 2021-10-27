@@ -3,4 +3,6 @@
     <string name="button_add_agent">Add Agent</string>
     <string name="add_property_title">Add Property</string>
     <string name="button_add_property">Add property</string>
+    <string name="take_new_picture">Take a new picture</string>
+    <string name="pick_from_library">Select from gallery</string>
 </resources>

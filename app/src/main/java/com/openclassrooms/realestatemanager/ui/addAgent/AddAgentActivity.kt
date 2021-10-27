@@ -24,7 +24,7 @@ class AddAgentActivity : AppCompatActivity(), EasyPermissions.PermissionCallback
     private lateinit var binding: ActivityAddAgentBinding
 
     private val addAgentViewModel: AddAgentViewModel by viewModels {
-        AddAgentViewModelFactory((application as RealEstateManagerApp).repository)
+        AddAgentViewModelFactory((application as RealEstateManagerApp).agentRepository)
     }
 
     private var uriProfileImage: String? = null

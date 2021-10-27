@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.data.repositories
 
-import androidx.annotation.WorkerThread
 import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.data.dao.AgentDao
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +17,14 @@ class AgentRepository (private val agentDao: AgentDao) {
 //    @WorkerThread
     suspend fun insert(agent: Agent) {
         agentDao.createAgent(agent)
+    }
+
+    suspend fun getAgent(agentId: String) : List<Agent> {
+        return agentDao.getAgent(agentId)
+    }
+
+     suspend fun getCountAgent() : Int {
+        return agentDao.getRowCount()
     }
 
 }

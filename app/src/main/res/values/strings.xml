@@ -82,6 +82,9 @@
     <string name="manage_by">Manage by</string>
     <string name="button_add_property">Add property</string>
     <string name="add_photos">ADD PICTURES</string>
+    <string name="Cant_be_empty">Can t be empty</string>
+    <string name="take_new_picture">Take a new picture</string>
+    <string name="pick_from_library">Select from gallery</string>
 
     <string-array name="type_of_properties">
         <item>Type</item>

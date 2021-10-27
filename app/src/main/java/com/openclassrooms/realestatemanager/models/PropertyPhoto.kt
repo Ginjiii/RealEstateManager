@@ -19,6 +19,7 @@ import com.openclassrooms.realestatemanager.utils.PHOTO_TABLE_NAME
 
 data class PropertyPhoto(
     @PrimaryKey @ColumnInfo(name = "photo_id") var id: String = "",
+    var label: String = "",
     var url: String = "",
     @ColumnInfo(name = "thumbnail_url") var thumbnailUrl: String? = null,
     @ColumnInfo(name = "server_url") var serverUrl: String? = null,

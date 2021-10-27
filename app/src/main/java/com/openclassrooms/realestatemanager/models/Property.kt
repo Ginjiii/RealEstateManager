@@ -35,7 +35,8 @@ data class Property(
         var soldDate: String = "",
         var agentId: Int,
         var coverPhoto: String,
-        var labelPhoto: String)
+        var labelPhoto: String,
+        var agent: String)
 
 enum class TypeProperty(val typeName: String) {
         FLAT("Flat"),

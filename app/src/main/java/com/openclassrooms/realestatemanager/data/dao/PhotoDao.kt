@@ -8,11 +8,11 @@ import com.openclassrooms.realestatemanager.utils.PHOTO_TABLE_NAME
 interface PhotoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPicture(photos: List<PropertyPhoto>)
+    suspend fun insertPhoto(photos: List<PropertyPhoto>)
 
     @Query("DELETE FROM $PHOTO_TABLE_NAME WHERE photo_id IN (:photoId)")
-    suspend fun deletePictures(photoId: List<String>)
+    suspend fun deletePhotos(photoId: List<String>)
 
     @Update
-    suspend fun updatePicture(photos: List<PropertyPhoto>)
+    suspend fun updatePhoto(photos: List<PropertyPhoto>)
 }

@@ -7,8 +7,10 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.provider.Settings
-
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -21,17 +23,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentMapBinding
-import com.openclassrooms.realestatemanager.models.PropertyWithAllData
+import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.ui.fragments.PropertyDetailFragment.Companion.isForDetailsFragment
-
 import com.openclassrooms.realestatemanager.ui.fragments.PropertyDetailFragment.Companion.isFromDetailsFragment
 import com.openclassrooms.realestatemanager.utils.Utils
-
 import pub.devrel.easypermissions.EasyPermissions
 
 
@@ -47,7 +45,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback,
     private lateinit var menu: Menu
 
 
-    private var propertiesList: List<PropertyWithAllData> = ArrayList()
+    private var propertiesList: List<Property> = ArrayList()
 
     companion object {
         var isFromMapFragment: Boolean = false

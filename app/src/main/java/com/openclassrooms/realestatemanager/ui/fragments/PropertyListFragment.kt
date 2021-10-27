@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -11,10 +10,7 @@ import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapters.PropertyListAdapter
 import com.openclassrooms.realestatemanager.databinding.FragmentPropertyListBinding
-import com.openclassrooms.realestatemanager.data.Agent
 import com.openclassrooms.realestatemanager.models.Property
-import com.openclassrooms.realestatemanager.models.PropertyWithAllData
-import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.ui.MainActivity
 import com.openclassrooms.realestatemanager.utils.Currency
 
@@ -31,7 +27,7 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     private var isDoubleScreenMode = false
 
     private lateinit var menu: Menu
-    private lateinit var propertiesList: List<PropertyWithAllData>
+    private lateinit var propertiesList: List<Property>
 
 
     companion object {
@@ -59,7 +55,7 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateDummyList()
+//        updateDummyList()
         configureRecyclerView()
     }
     // Setup recyclerview
@@ -75,16 +71,16 @@ class PropertyListFragment : Fragment(R.layout.fragment_property_list) {
         binding.recyclerViewList.adapter = propertyListAdapter
     }
 
-    private fun updateDummyList(){
-        val agent = Agent( "BBB", "CCC","eee@rem.com","060000000" )
-        val property = Property("0",type = TypeProperty.HOUSE, 0,0,0,0,0,"belle maison",
-            "address", "91919191", "city", "FRANCE", true, "available date", "soldDate", 0, "photo", "photoLabel" )
-        val propertyWithAllData = PropertyWithAllData(property, agent)
-
-        propertiesList = listOf<PropertyWithAllData>(propertyWithAllData)
-        Log.d("TAGii", "size:" + propertiesList.size)
+//    private fun updateDummyList(){
+//        val agent = Agent( "BBB", "CCC","eee@rem.com","060000000" )
+//        val property = Property("0",type = TypeProperty.HOUSE, 0,0,0,0,0,"belle maison",
+//            "address", "91919191", "city", "FRANCE", true, "available date", "soldDate", 0, "photo", "photoLabel" )
+//        val propertyWithAllData = PropertyWithAllData(property, agent)
+//
+//        propertiesList = listOf<PropertyWithAllData>(propertyWithAllData)
+//        Log.d("TAGii", "size:" + propertiesList.size)
 //        propertyListAdapter.update(propertyWithAllDataList)
-    }
+//    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

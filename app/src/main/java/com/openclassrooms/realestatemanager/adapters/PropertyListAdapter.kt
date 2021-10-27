@@ -8,12 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.databinding.ItemPropertyBinding
-import com.openclassrooms.realestatemanager.models.PropertyWithAllData
+import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.utils.Currency
+import com.openclassrooms.realestatemanager.utils.Utils
 
-class PropertyListAdapter(var properties: List<PropertyWithAllData>,
+class PropertyListAdapter(var properties: List<Property>,
                           var currency: Currency?,
                           val glide: RequestManager, private var isDoubleScreen: Boolean)
     : RecyclerView.Adapter<PropertyViewHolder>() {
@@ -38,12 +38,12 @@ class PropertyListAdapter(var properties: List<PropertyWithAllData>,
         Log.d("TAG", "WHERE IS THE ADAPTER??")
     }
 
-    fun update(properties: List<PropertyWithAllData>) {
+    fun update(properties: List<Property>) {
         this.properties = properties
         notifyDataSetChanged()
     }
 
-    fun getProperty(position: Int): PropertyWithAllData {
+    fun getProperty(position: Int): Property {
         return properties[position]
     }
 
@@ -76,20 +76,20 @@ class PropertyViewHolder(private val binding: ItemPropertyBinding) : RecyclerVie
     }
 
     fun updateWithProperty(
-            property: PropertyWithAllData, glide: RequestManager,
+            property: Property, glide: RequestManager,
             currency: Currency?, context: Context, isDoubleScreen: Boolean, isSelected: Boolean
     ) {
         this.isSelected = isSelected
         this.context = context
-        isSold = property.property.isSold
+        isSold = true
 Log.d("TAG", "call?")
         binding.image.setImageResource(R.drawable.home)
 
-        binding.type.text = property.property.type.typeName
-        binding.city.text = property.property.street[0].toString()
+        binding.type.text = property.type.typeName
+        binding.city.text = property.street[0].toString()
         binding.price.text = when (currency) {
-            Currency.EURO -> "${Utils.convertEuroToDollar(property.property.priceInDollars)}€"
-            Currency.DOLLAR -> "$${Utils.convertDollarToEuro(property.property.priceInDollars)}"
+            Currency.EURO -> "${Utils.convertEuroToDollar(property.priceInDollars)}€"
+            Currency.DOLLAR -> "$${Utils.convertDollarToEuro(property.priceInDollars)}"
             else -> ""
         }
 
