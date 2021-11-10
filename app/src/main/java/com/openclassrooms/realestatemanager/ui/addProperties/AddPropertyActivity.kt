@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +20,7 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddPropertyBindi
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.utils.ACTION_TYPE_ADD_PROPERTY
+import com.openclassrooms.realestatemanager.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,34 +65,34 @@ class AddPropertyActivity : AppCompatActivity() {
     }
 
     // Validate necessary fields
-//    private fun confirmValidation() {
-//        if (!validateType()
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
-//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
-//        ) Toast.makeText(
-//            applicationContext,
-//            "Please fill all the required fields",
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        else saveProperty()
-//    }
+    private fun confirmValidation() {
+        if (!validateType()
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
+            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
+        ) Toast.makeText(
+            applicationContext,
+            "Please fill all the required fields",
+            Toast.LENGTH_SHORT
+        ).show()
+        else saveProperty()
+    }
 
     // Validate property type spinner
-//    private fun validateType(): Boolean {
-//        val errorText: TextView = binding.spType.selectedView as TextView
-//
-//        return if (binding.spType.selectedItem.toString() == "Type") {
-//            errorText.error = "Choose a type"
-//            false
-//        } else {
-//            errorText.error = null
-//            true
-//        }
-//    }
+    private fun validateType(): Boolean {
+        val errorText: TextView = binding.spType.selectedView as TextView
+
+        return if (binding.spType.selectedItem.toString() == "Type") {
+            errorText.error = "Choose a type"
+            false
+        } else {
+            errorText.error = null
+            true
+        }
+    }
 
     private fun saveProperty() {
         val property = Property(

@@ -18,6 +18,7 @@ class PropertyListAdapter(var properties: List<Property>,
                           val glide: RequestManager, private var isDoubleScreen: Boolean)
     : RecyclerView.Adapter<PropertyViewHolder>() {
 
+    private lateinit var adapter: PhotoListAdapter
     private lateinit var context: Context
     private val viewHolders = mutableListOf<PropertyViewHolder>()
     var itemSelected: Int? = null
