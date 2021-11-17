@@ -4,8 +4,9 @@ import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.data.repositories.AgentRepository
 import com.openclassrooms.realestatemanager.data.repositories.PropertyRepository
 import com.openclassrooms.realestatemanager.models.Property
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AddPropertyViewModel(private val repository: PropertyRepository, private val agentRepository: AgentRepository) : ViewModel() {
 
@@ -20,8 +21,8 @@ class AddPropertyViewModel(private val repository: PropertyRepository, private v
         repository.insert(property)
     }
 
-    fun checkAgent(): Job = viewModelScope.launch {
-        agentRepository.getCountAgent()
+    suspend fun checkAgent() = withContext(Dispatchers.IO) {
+        agentRepository.getCountAgent() > 0
     }
 }
 

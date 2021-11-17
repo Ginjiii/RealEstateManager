@@ -2,25 +2,26 @@ package com.openclassrooms.realestatemanager.ui.addProperties
 
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.RealEstateManagerApp
 import com.openclassrooms.realestatemanager.databinding.ActivityAddPropertyBinding
 import com.openclassrooms.realestatemanager.models.Property
 import com.openclassrooms.realestatemanager.models.TypeProperty
 import com.openclassrooms.realestatemanager.utils.ACTION_TYPE_ADD_PROPERTY
-import com.openclassrooms.realestatemanager.utils.Utils
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,15 +50,21 @@ class AddPropertyActivity : AppCompatActivity() {
         binding = ActivityAddPropertyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         configureActionType()
         setupTypeSpinner()
         setupRoomsSpinner()
 
         binding.availableDate.setOnClickListener { showDatePickerDialog(binding.availableDate) }
-        binding.buttonAddProperty.setOnClickListener { addPropertyViewModel.checkAgent()
-        Log.d("Tagiii","" + addPropertyViewModel.checkAgent() )}
-
+        binding.buttonAddProperty.setOnClickListener {
+            lifecycleScope.launch {
+                if (addPropertyViewModel.checkAgent()) {
+                    val intent = Intent(applicationContext, AddPropertyActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext, getString(R.string.create_agent_first), Toast.LENGTH_LONG).show()
+                }
+                Log.d("tagii","act: " + addPropertyViewModel.checkAgent() )}
+        }
     }
 
     private fun configureActionType() {
@@ -65,34 +72,34 @@ class AddPropertyActivity : AppCompatActivity() {
     }
 
     // Validate necessary fields
-    private fun confirmValidation() {
-        if (!validateType()
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
-            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
-        ) Toast.makeText(
-            applicationContext,
-            "Please fill all the required fields",
-            Toast.LENGTH_SHORT
-        ).show()
-        else saveProperty()
-    }
+//    private fun confirmValidation() {
+//        if (!validateType()
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.price, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.street, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.postcode, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCity, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.etCountry, "Can't be empty"))
+//            or (!Utils.validateInputFieldIfNullOrEmpty(binding.availableDate, "Can't be empty"))
+//        ) Toast.makeText(
+//            applicationContext,
+//            "Please fill all the required fields",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//        else saveProperty()
+//    }
 
     // Validate property type spinner
-    private fun validateType(): Boolean {
-        val errorText: TextView = binding.spType.selectedView as TextView
-
-        return if (binding.spType.selectedItem.toString() == "Type") {
-            errorText.error = "Choose a type"
-            false
-        } else {
-            errorText.error = null
-            true
-        }
-    }
+//    private fun validateType(): Boolean {
+//        val errorText: TextView = binding.spType.selectedView as TextView
+//
+//        return if (binding.spType.selectedItem.toString() == "Type") {
+//            errorText.error = "Choose a type"
+//            false
+//        } else {
+//            errorText.error = null
+//            true
+//        }
+//    }
 
     private fun saveProperty() {
         val property = Property(
@@ -111,7 +118,7 @@ class AddPropertyActivity : AppCompatActivity() {
             agentId = currentAgentId,
             coverPhoto = croppedPhoto!!,
             labelPhoto = labelPhoto,
-        agent = binding.addPropertyViewDropdownAgent.toString())
+            agent = binding.addPropertyViewDropdownAgent.toString())
         addPropertyViewModel.insert(property)
         Toast.makeText(this, "Property added", Toast.LENGTH_LONG)
             .show()

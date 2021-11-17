@@ -23,8 +23,7 @@ class AgentRepository (private val agentDao: AgentDao) {
         return agentDao.getAgent(agentId)
     }
 
-     suspend fun getCountAgent() : Int {
+    suspend fun getCountAgent() : Int {
         return agentDao.getRowCount()
     }
-
 }

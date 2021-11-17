@@ -20,6 +20,6 @@ interface AgentDao {
     suspend fun createAgent(agent: Agent)
 
     @Query("SELECT COUNT(*) FROM $AGENT_TABLE_NAME")
-   suspend fun getRowCount(): Int
+    suspend fun getRowCount(): Int
 
 }

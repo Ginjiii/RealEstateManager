@@ -1,26 +1,31 @@
 package com.openclassrooms.realestatemanager.ui
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.RealEstateManagerApp
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import com.openclassrooms.realestatemanager.ui.addAgent.AddAgentActivity
 import com.openclassrooms.realestatemanager.ui.addProperties.AddPropertyActivity
+import com.openclassrooms.realestatemanager.ui.addProperties.AddPropertyViewModel
+import com.openclassrooms.realestatemanager.ui.addProperties.AddPropertyViewModelFactory
 import com.openclassrooms.realestatemanager.ui.fragments.*
-import com.openclassrooms.realestatemanager.utils.RC_CODE_ADD_AGENT
 import com.openclassrooms.realestatemanager.utils.RC_IMAGE_PERMS
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList
 import com.wangjie.rapidfloatingactionbutton.util.RFABTextUtil
+import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.EasyPermissions
 
 
@@ -35,6 +40,10 @@ class MainActivity : AppCompatActivity(),
 
     private var detailsView: PropertyDetailFragment? = null
     private lateinit var rfabHelper: RapidFloatingActionHelper
+
+    private val addPropertyViewModel: AddPropertyViewModel by viewModels {
+        AddPropertyViewModelFactory((application as RealEstateManagerApp).repository, (application as RealEstateManagerApp).agentRepository)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,8 +184,8 @@ class MainActivity : AppCompatActivity(),
     override fun onRFACItemLabelClick(position: Int, item: RFACLabelItem<RFACLabelItem<Int>>?) {
         when(position){
             0 -> showAddPropertyActivity()
-            1 -> showAddAgentActivity()
 
+            1 -> showAddAgentActivity()
         }
 
         rfabHelper.toggleContent()
@@ -203,7 +212,13 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun showAddPropertyActivity(){
-        val intent = Intent(this, AddPropertyActivity::class.java)
-        startActivity(intent)
+        lifecycleScope.launch {
+            if (addPropertyViewModel.checkAgent()) {
+                val intent = Intent(applicationContext, AddPropertyActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(applicationContext, " Please, Add an agent to get in", Toast.LENGTH_LONG).show()
+            }
+            Log.d("tagii","act: " + addPropertyViewModel.checkAgent() )}
     }
 }
